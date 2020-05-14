@@ -1,12 +1,10 @@
 let clearButton = document.querySelector('button');
-let container = document.getElementById('container');
+let container = document.getElementById('gridContainer');
 let box = '<div class="box"></div>';
-
 
 function createGrid($gridSize) {
     if ($gridSize > 64) {
         $gridSize = 64;
-
         container.setAttribute("style", "grid-template-columns: repeat(" + $gridSize + "," + 100 / $gridSize + "%); grid-template-rows: repeat(" + $gridSize + "," + 100 / $gridSize + "%);");
         for (var i = 0; i < $gridSize * $gridSize; i++) {
             container.innerHTML += box;
@@ -17,16 +15,14 @@ function createGrid($gridSize) {
             container.innerHTML += box;
         }
     }
-
-
 }
 
-
+createGrid(32);
 
 function setBoxHeight() {
     let box = document.querySelector('.box');
     let boxWidth = box.clientWidth;
-    var x = document.getElementById("container");
+    var x = document.getElementById("gridContainer");
     var y = x.getElementsByTagName("div");
     var i;
     for (i = 0; i < y.length; i++) {
@@ -40,35 +36,22 @@ function clearGrid() {
         container.removeChild(child);
         child = container.lastElementChild;
     }
-
-    let newGrid = prompt('What size canvas would you like? EX: 16 creates a 16 x 16 canvas. MAX: 64');
-
+    let newGrid = prompt('How many squares per side would you like?');
     createGrid(parseInt(newGrid));
-
-    let pixels = document.querySelectorAll('.box');
-
-    pixels.forEach(item => {
+    let squares = document.querySelectorAll('.box');
+    squares.forEach(item => {
         item.addEventListener('mouseover', event => {
-            console.log("Wheee!");
-            item.style.cssText = "background: rgb(" + randomRGB() + "," + randomRGB() + "," + randomRGB() + ")";
+            item.style.cssText = "background-color:gray";
         })
     });
 
 }
 
-function randomRGB() {
-    return Math.floor(Math.random() * Math.floor(255));
-}
+let squares = document.querySelectorAll('.box');
 
-createGrid(32);
-//setBoxHeight();
-
-let pixels = document.querySelectorAll('.box');
-
-pixels.forEach(item => {
+squares.forEach(item => {
     item.addEventListener('mouseover', event => {
-        console.log("Wheee!");
-        item.style.cssText = "background: rgb(" + randomRGB() + "," + randomRGB() + "," + randomRGB() + ")";
+        item.style.cssText = "background-color:gray";
     })
 });
 
